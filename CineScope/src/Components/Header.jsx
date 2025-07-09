@@ -48,11 +48,14 @@ const Header = () => {
       </div>
 
       {/* Center: Navigation Links */}
-      <nav className="hidden md:flex gap-6">
-        <a href="/" className="hover:text-pink-400">Home</a>
-        <a href="/movies" className="hover:text-pink-400">Movies</a>
-        <a href="/tv-shows" className="hover:text-pink-400">TV Shows</a>
-      </nav>
+     import { Link } from 'react-router-dom';
+
+<nav className="hidden md:flex gap-6">
+  <Link to="/" className="hover:text-pink-400">Home</Link>
+  <Link to="/movies" className="hover:text-pink-400">Movies</Link>
+  <Link to="/tv-shows" className="hover:text-pink-400">TV Shows</Link>
+</nav>
+
 
       {/* Right: Search + Icons */}
       <div className="flex items-center gap-4">
