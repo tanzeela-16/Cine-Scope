@@ -1,44 +1,34 @@
 import axios from 'axios';
-import { API_BASE_URL, API_KEY } from '../config';
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  params: {
-    api_key: API_KEY,
-    language: 'en-US',
-  },
-});
+// Access your API key from .env
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 export const fetchTrendingMovies = async () => {
-  const res = await api.get('/trending/movie/week');
-  return res.data.results;
-};
-
-export const fetchGenres = async () => {
-  const res = await api.get('/genre/movie/list');
-  return res.data.genres;
-};
-
-export const fetchMoviesByGenre = async (genreId) => {
-  const res = await api.get('/discover/movie', {
+  const response = await axios.get(`${BASE_URL}/trending/movie/week`, {
     params: {
-      with_genres: genreId,
-      sort_by: 'popularity.desc',
+      api_key: API_KEY,
     },
   });
-  return res.data.results;
+  return response.data.results;
 };
 
 export const fetchMovieById = async (id) => {
-  const res = await api.get(`/movie/${id}`);
-  return res.data;
-};
-
-export const searchMovies = async (query) => {
-  const res = await api.get('/search/movie', {
+  const response = await axios.get(`${BASE_URL}/movie/${id}`, {
     params: {
-      query,
+      api_key: API_KEY,
     },
   });
-  return res.data.results;
+  return response.data;
+};
+
+// ✅ NEW FUNCTION: use this in Home.jsx
+export const fetchMovies = async () => {
+  const response = await axios.get(`${BASE_URL}/discover/movie`, {
+    params: {
+      api_key: API_KEY,
+      sort_by: 'popularity.desc',
+    },
+  });
+  return response.data.results;
 };

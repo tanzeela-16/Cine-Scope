@@ -1,22 +1,27 @@
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import MovieDetail from './pages/MovieDetail';
-import Favorites from './pages/Favorites';
-import NotFound from './pages/NotFound';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Home from './pages/Home';
+import Favorites from './pages/Favorites';
+import MovieDetail from './pages/MovieDetail';
+import NotFound from './pages/NotFound';
 
-export default function App() {
+const App = () => {
   return (
-    <div className="bg-black min-h-screen text-white">
-      <Header />
-      <main className="px-4 max-w-7xl mx-auto">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movie/:id" element={<MovieDetail />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-    </div>
+    <Router>
+      <div className="bg-[#0F0F0F] text-white min-h-screen">
+        <Header /> {/* 👈 Make sure Header is added here */}
+        <main className="p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/movie/:id" element={<MovieDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
-}
+};
+
+export default App;
